@@ -6,6 +6,7 @@ using UnityEngine.UI;
 
 public class PlayerMove : MonoBehaviour
 {
+    public static PlayerMove instance; 
     public Text CdTxt;
 
     [Header("Movimentação")]
@@ -15,10 +16,12 @@ public class PlayerMove : MonoBehaviour
     public float spd;
     public float rotationSpd;
 
-  
+
     [Header("Vida")]
+    public Text vidaTxt;
     public int PlayerHp;
     public int PlayerMaxHp;
+
     MeshRenderer mr;
     Color defaultColor;
     public float timeToColor;
@@ -34,6 +37,7 @@ public class PlayerMove : MonoBehaviour
 
     private void Start()
     {
+        instance = this;
         playerRb = GetComponent<Rigidbody>();
         PlayerHp = PlayerMaxHp;
          mr = GetComponent<MeshRenderer>();
@@ -88,6 +92,14 @@ public class PlayerMove : MonoBehaviour
         if (DashCdNow <= 0)
             DashCdNow = 0;
     }
+
+    public void IncreaseHealth(int value)
+    {
+        PlayerHp += value; 
+        vidaTxt.text = $"Hp :{PlayerHp}";
+
+    }
+
 
     public void TakeDamage(int damage)
     {

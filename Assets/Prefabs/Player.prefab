@@ -97,9 +97,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 86b588cd73d989345a183f24dcba9721, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bulletSpd: 50
+  bulletSpd: 100
   bulletRate: 1
-  fireTickCd: 20
+  fireTickCd: 40
   fireTickNow: 0
   bulletprefab: {fileID: 4565471415880030372, guid: 6d8bcd88cbfafd5469d9b5be880d6628,
     type: 3}

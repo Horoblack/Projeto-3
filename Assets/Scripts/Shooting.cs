@@ -16,7 +16,9 @@ public class Shooting : MonoBehaviour
    
     void Shoot()
     {
-        fireTickNow--;
+      
+       fireTickNow   = Mathf.Clamp(fireTickNow, 1, fireTickCd);
+       fireTickNow--;
         if (fireTickNow <= 0 && Input.GetButton("Fire1"))
         {        
                 Rigidbody clone = Instantiate(bulletprefab, new Vector3(transform.position.x,1f, transform.position.z), transform.rotation );      
