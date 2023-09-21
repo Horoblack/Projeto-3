@@ -10,16 +10,9 @@ public class Menu : MonoBehaviour
     public string cena;
     public GameObject optionsPanel;
 
-    // Start is called before the first frame update
-    void Start()
+    private void Awake()
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        cena = "TesteRanged";
     }
 
     public void Jogar()

@@ -37,7 +37,7 @@ public class BulletDespawn : MonoBehaviour
 
         else if (other.CompareTag("Enemy"))
         {
-            other.TryGetComponent<EnemyAi>(out EnemyAi enemy);
+            other.TryGetComponent<EnemyAiExplosive>(out EnemyAiExplosive enemy);
             enemy.TakeDamage(damageBullet);
             Destroy(gameObject);
            

@@ -11,9 +11,11 @@ public class PauseMenu : MonoBehaviour
     public string cena;
 
 
+
     // Start is called before the first frame update
     void Start()
     {
+        cena = "Menu";
         Time.timeScale = 1f;
     }
 

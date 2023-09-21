@@ -41,7 +41,7 @@ public class PlayerMove : MonoBehaviour
         playerRb = GetComponent<Rigidbody>();
         PlayerHp = PlayerMaxHp;
          mr = GetComponent<MeshRenderer>();
-        defaultColor = mr.material.color;
+         defaultColor = mr.material.color;
     }
 
     void mouseSpin()
@@ -104,6 +104,7 @@ public class PlayerMove : MonoBehaviour
     public void TakeDamage(int damage)
     {
         PlayerHp -= damage;
+        vidaTxt.text = $"Hp :{PlayerHp}";
         StartCoroutine(SwitchColors());
         if (PlayerHp <= 0)
         {

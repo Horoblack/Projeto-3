@@ -29,11 +29,17 @@ public class EnemyAiExplosive : MonoBehaviour
     public int EnemyHealth;
     public int EnemyMaxHealth;
 
+    MeshRenderer mr;
+    Color defaultColor;
+    public float timeToColor = 0.1f;
+
     private void Awake()
     {
         player = GameObject.FindGameObjectWithTag("Player").transform;
         agent = GetComponent<NavMeshAgent>();
         EnemyHealth = EnemyMaxHealth;
+        mr = GetComponent<MeshRenderer>();
+        defaultColor = mr.material.color;
     }
 
 
@@ -90,7 +96,17 @@ public class EnemyAiExplosive : MonoBehaviour
     public void TakeDamage(int damage)
     {
         EnemyHealth -= damage;
+        StartCoroutine(SwitchColors());
         if (EnemyHealth <= 0) Invoke(nameof(DestroyEnemy), 0f);
+
+    }
+
+    IEnumerator SwitchColors()
+    {
+
+        mr.material.color = Color.red;
+        yield return new WaitForSeconds(0.2f);
+        mr.material.color = defaultColor;
 
     }
 
@@ -110,8 +126,6 @@ public class EnemyAiExplosive : MonoBehaviour
                  
         }
       
-
-
     }
 
     private void OnDrawGizmos()
