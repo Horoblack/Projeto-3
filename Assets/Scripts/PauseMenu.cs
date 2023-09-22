@@ -8,6 +8,7 @@ public class PauseMenu : MonoBehaviour
 
     private bool isPaused;
     public GameObject pausePanel;
+    public GameObject playerGo;
     public string cena;
 
 
@@ -17,6 +18,7 @@ public class PauseMenu : MonoBehaviour
     {
         cena = "Menu";
         Time.timeScale = 1f;
+        playerGo = GameObject.FindGameObjectWithTag("Player");
     }
 
     // Update is called once per frame
@@ -33,6 +35,7 @@ public class PauseMenu : MonoBehaviour
     {
         if (isPaused)
         {
+            playerGo.GetComponent<PlayerMove>().enabled = true;
             isPaused = false;
             Time.timeScale = 1f;
             pausePanel.SetActive(false);
@@ -42,6 +45,7 @@ public class PauseMenu : MonoBehaviour
             isPaused = true;
             Time.timeScale = 0f;
             pausePanel.SetActive(true);
+            playerGo.GetComponent<PlayerMove>().enabled = false;
         }
     }
 
