@@ -15,7 +15,10 @@ public class Items : ScriptableObject
     {
         Bandagem,
         Munição,
-        Cartão
+        Cartão1,
+        Cartao2,
+        Cartao3,
+        Cartao4
     }
 
 

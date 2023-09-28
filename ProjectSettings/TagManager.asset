@@ -12,6 +12,7 @@ TagManager:
   - BladeRight
   - BulletRed
   - BulletBlue
+  - Inventario
   layers:
   - Default
   - TransparentFX

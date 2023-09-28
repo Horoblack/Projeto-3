@@ -1546,6 +1546,7 @@ MonoBehaviour:
   storyText: {fileID: 1422332450}
   backgroundImage: {fileID: 720649375}
   distancia: 2.46
+  playerGo: {fileID: 0}
 --- !u!4 &1655999869 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1214985205658990930, guid: 23aec30b999a5594e95fae5a5dde80c6,
@@ -1963,7 +1964,7 @@ GameObject:
   - component: {fileID: 2003352641}
   m_Layer: 5
   m_Name: InvCanvas
-  m_TagString: Untagged
+  m_TagString: Inventario
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2066,6 +2067,7 @@ MonoBehaviour:
   inv: {fileID: 485530510}
   isOpen: 0
   manager: {fileID: 887697766}
+  playerGo: {fileID: 0}
 --- !u!1 &2010306006
 GameObject:
   m_ObjectHideFlags: 0
@@ -2096,6 +2098,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pausePanel: {fileID: 1431053573}
+  playerGo: {fileID: 0}
   cena: 
 --- !u!4 &2010306008
 Transform:
@@ -2528,6 +2531,11 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 40
       objectReference: {fileID: 0}
+    - target: {fileID: 7496340387463213035, guid: 87198e8f78d7482478f338e15dd8bbac,
+        type: 3}
+      propertyPath: m_Text
+      value: 00
+      objectReference: {fileID: 0}
     - target: {fileID: 7730210145987861533, guid: 87198e8f78d7482478f338e15dd8bbac,
         type: 3}
       propertyPath: m_Name
@@ -2542,6 +2550,18 @@ PrefabInstance:
       addedObject: {fileID: 1431053576}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 87198e8f78d7482478f338e15dd8bbac, type: 3}
+--- !u!114 &323287630215119429 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7496340387463213035, guid: 87198e8f78d7482478f338e15dd8bbac,
+    type: 3}
+  m_PrefabInstance: {fileID: 323287630215119428}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &2848064275433613468
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2809,6 +2829,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1491887939797581642, guid: 23aec30b999a5594e95fae5a5dde80c6,
+        type: 3}
+      propertyPath: m_TagString
+      value: Untagged
+      objectReference: {fileID: 0}
     - target: {fileID: 3178289644251787606, guid: 23aec30b999a5594e95fae5a5dde80c6,
         type: 3}
       propertyPath: CdTxt
@@ -2823,6 +2848,21 @@ PrefabInstance:
         type: 3}
       propertyPath: PlayerMaxHp
       value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 4748583966740562745, guid: 23aec30b999a5594e95fae5a5dde80c6,
+        type: 3}
+      propertyPath: ammo
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 4748583966740562745, guid: 23aec30b999a5594e95fae5a5dde80c6,
+        type: 3}
+      propertyPath: ammoTxt
+      value: 
+      objectReference: {fileID: 323287630215119429}
+    - target: {fileID: 4748583966740562745, guid: 23aec30b999a5594e95fae5a5dde80c6,
+        type: 3}
+      propertyPath: maxAmmo
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 6586913532527551642, guid: 23aec30b999a5594e95fae5a5dde80c6,
         type: 3}

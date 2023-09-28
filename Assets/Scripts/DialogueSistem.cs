@@ -26,10 +26,15 @@ public class DialogueSistem : MonoBehaviour
     private string currentDisplayText = "";
     private int textIndex = 0;
     private bool isDisplayingText = false;
+    public GameObject playerGo;
+    public GameObject invGo;
 
 
     void Start()
     {
+        playerGo = GameObject.FindGameObjectWithTag("Player");
+        invGo = GameObject.FindGameObjectWithTag("Inventario");
+
         interactText.enabled = false;
         storyText.enabled = false;
         jogador = GameObject.FindWithTag("Player");
@@ -84,6 +89,9 @@ public class DialogueSistem : MonoBehaviour
 
     private void StartStory()
     {
+        playerGo.GetComponent<PlayerMove>().enabled = false;
+        invGo.GetComponent<Inventario>().enabled = false;
+
         storyStarted = true;
         interactText.enabled = false;
         storyText.enabled = true;
@@ -137,6 +145,8 @@ public class DialogueSistem : MonoBehaviour
         backgroundImage.enabled = false;
         Time.timeScale = originalTimeScale;
         isPlayerBlocked = false;
+        playerGo.GetComponent<PlayerMove>().enabled = true;
+        invGo.GetComponent<Inventario>().enabled = true;
     }
 
     private void DisplayNextCharacter()
