@@ -3,16 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class DialogueSistem : MonoBehaviour
+public class DialogueArea : MonoBehaviour
 {
-    public Text interactText;
+    
     public Text storyText;
     public Image backgroundImage;
-    [Range(0.1f, 10.0f)] public float distancia = 3;
     private GameObject jogador;
-    private bool isInRange = false;
-    private bool storyStarted = false;
+    [Range(0.1f, 10.0f)] public float distancia = 3;
 
+    private bool dialoguePlayed = false; // Variável para verificar se o diálogo já foi reproduzido
     private string[] storyParts;
     private int currentPartIndex = 0;
 
@@ -27,51 +26,75 @@ public class DialogueSistem : MonoBehaviour
     private int textIndex = 0;
     private bool isDisplayingText = false;
     public GameObject playerGo;
-    public GameObject invGo;
+    
 
 
     void Start()
     {
         playerGo = GameObject.FindGameObjectWithTag("Player");
-        invGo = GameObject.FindGameObjectWithTag("Inventario");
-
-        interactText.enabled = false;
+        
+        
         storyText.enabled = false;
         jogador = GameObject.FindWithTag("Player");
         backgroundImage.enabled = false;
 
         storyParts = new string[]
         {
-        "Parte 1 do diálogo - Saiba que você tera que resolver alguns enigmas da nave pra pegar os cartões.",
-        "Parte 2 do diálogo - Tem alguma coisa de errado acontecendo e você vai descobrir.",
-        "Parte 3 do diálogo - Tenha muito cuidado por onde andar, se não quiser ser pego de surpresa.",
+        "Olá, meu nome é ..... sou a inteligencia artificial da nave, você acaba de acordar de um sono profundo.",
+        "A Nave esta sendo invadida por criaturas fora do comum, e só você podera me ajudar a elimina-las.",
+        "Para isso preciso que você encontre 3 cartões, e de eles para mim, assim eu posso ter acesso as armas da nave.",
             // Adicione quantas partes do diálogo desejar
         };
 
         originalTimeScale = Time.timeScale;
     }
 
+    void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Player") && !dialoguePlayed) // Verifica se o jogador colidiu e se o diálogo ainda não foi reproduzido
+        {
+            StartStory();
+            dialoguePlayed = true; // Marca o diálogo como reproduzido para evitar repetições
+        }
+    }
+
+    void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            FinishStory();
+        }
+    }
+
+
     void Update()
     {
-        float distanceToPlayer = Vector3.Distance(transform.position, jogador.transform.position);
-
-        if (!storyStarted && distanceToPlayer < distancia)
+        if (isPlayerBlocked && Input.GetKeyDown(KeyCode.Space))
         {
-            interactText.enabled = true;
-
-            if (Input.GetKeyDown(KeyCode.E))
+            if (isDisplayingText)
             {
-                StartStory();
+                // Mostrar o texto inteiro imediatamente se o jogador pressionar espaço enquanto está sendo escrito
+                currentDisplayText = storyParts[currentPartIndex];
+                storyText.text = currentDisplayText;
+                textIndex = storyParts[currentPartIndex].Length;
+                isDisplayingText = false;
             }
-        }
-        else
-        {
-            interactText.enabled = false;
-        }
-
-        if (isInRange && Input.GetKeyDown(KeyCode.Space))
-        {
-            ContinueStory();
+            else
+            {
+                // Passar para a próxima parte do diálogo quando o jogador pressionar espaço
+                currentPartIndex++;
+                if (currentPartIndex < storyParts.Length)
+                {
+                    currentDisplayText = "";
+                    textIndex = 0;
+                    isDisplayingText = true;
+                }
+                else
+                {
+                    // Se todas as partes do diálogo foram exibidas, encerrar o diálogo
+                    FinishStory();
+                }
+            }
         }
 
         // Atualizar o efeito de escrita independentemente do Time.timeScale
@@ -90,13 +113,10 @@ public class DialogueSistem : MonoBehaviour
     private void StartStory()
     {
         playerGo.GetComponent<PlayerMove>().enabled = false;
-        invGo.GetComponent<Inventario>().enabled = false;
+        
 
-        storyStarted = true;
-        interactText.enabled = false;
         storyText.enabled = true;
         backgroundImage.enabled = true;
-        isInRange = true;
         isPlayerBlocked = true;
 
         currentDisplayText = "";
@@ -109,44 +129,17 @@ public class DialogueSistem : MonoBehaviour
         Time.timeScale = 0f;
     }
 
-    private void ContinueStory()
-    {
-        if (isDisplayingText)
-        {
-            // Mostrar o texto inteiro imediatamente se o jogador clicar enquanto está sendo escrito
-            currentDisplayText = storyParts[currentPartIndex];
-            storyText.text = currentDisplayText;
-            textIndex = storyParts[currentPartIndex].Length;
-            isDisplayingText = false;
-        }
-        else
-        {
-            currentPartIndex++;
-
-            if (currentPartIndex < storyParts.Length)
-            {
-                currentDisplayText = "";
-                textIndex = 0;
-                isDisplayingText = true;
-            }
-            else
-            {
-                FinishStory();
-            }
-        }
-    }
+    
 
     private void FinishStory()
     {
         currentPartIndex = 0;
-        storyStarted = false;
-        isInRange = false;
         storyText.enabled = false;
         backgroundImage.enabled = false;
         Time.timeScale = originalTimeScale;
         isPlayerBlocked = false;
         playerGo.GetComponent<PlayerMove>().enabled = true;
-        invGo.GetComponent<Inventario>().enabled = true;
+        
     }
 
     private void DisplayNextCharacter()
